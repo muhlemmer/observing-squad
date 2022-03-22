@@ -27,57 +27,12 @@ docker pull elrondnetwork/elrond-go-keygenerator:latest
 
 ## How to setup the Docker-based Observing Squad
 
-### Generate PEM files
-
-First, generate 4 PEM files, one for each Observer by running the keygenerator 4 times:
-
-```bash
-export KEYS_FOLDER=~/keys
-docker run --rm --mount type=bind,source=${KEYS_FOLDER},destination=/keys --workdir /keys elrondnetwork/elrond-go-keygenerator:latest
-```
-
-After running the command 4 times, rename the resulted files to:
-
-- `observerKey_0.pem`
-- `observerKey_1.pem`
-- `observerKey_2.pem`
-- `observerKey_metachain.pem`
-
-**Note:** the files will be owned by the `root` user. In order to `chown` them, do as follows:
-
-```bash
-sudo chown $(whoami) *
-```
-
 ### Prepare folder structure
 
-In a folder of your choice (e.g. `MyObservingSquad`), create the following structure, and copy the observer PEM files in the `node-n/config` subfolders:
+In a folder of your choice (e.g. `MyObservingSquad`), create the data directories:
 
-```
-.
-├── node-0
-│   ├── config
-│   │   └── observerKey_0.pem
-│   ├── db
-│   │   └──
-│   └── logs
-├── node-1
-│   ├── config
-│   │   └── observerKey_1.pem
-│   ├── db
-│   └── logs
-├── node-2
-│   ├── config
-│   │   └── observerKey_2.pem
-│   ├── db
-│   └── logs
-├── node-metachain
-│   ├── config
-│   │   └── observerKey_metachain.pem
-│   ├── db
-│   └── logs
-└── proxy
-    └── config
+```bash
+mkdir -p ~/MyObservingSquad/{node-0,node-1,node-2,node-metachain}
 ```
 
 ### Create a docker network

@@ -19,9 +19,9 @@ RUN useradd -U -u ${uid} -d ${workdir} -M -s /sbin/nologin elrond
 #Copy the built app to the container
 COPY --from=builder "${workdir}" "${workdir}"
 COPY configs/config.toml ${workdir}/config/
-COPY entrypoint.sh /
+COPY proxy-entrypoint.sh /
 
 WORKDIR ${workdir}
 EXPOSE 8079
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT [ "/proxy-entrypoint.sh" ]
 CMD ["./proxy"]
