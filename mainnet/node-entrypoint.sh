@@ -17,4 +17,9 @@ if [ ! -e config ]; then # first run, create directories and set ownership.
 fi
 
 # set reduced priviledges
-exec setpriv --reuid=${uid} --regid=${uid} --init-groups $@
+exec setpriv --reuid=${uid} --regid=${uid} --init-groups node \
+    --log-save \
+    --log-level=${LOG_LEVEL:-*:DEBUG,core/dblookupext:WARN} \
+    --log-logger-name \
+    --rest-api-interface=0.0.0.0:8080 \
+    "$@"

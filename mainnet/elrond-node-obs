@@ -33,4 +33,4 @@ VOLUME [ "/data" ]
 EXPOSE 8080
 
 WORKDIR /data
-ENTRYPOINT ["/node-entrypoint.sh", "node", "--log-save", "--log-level=*:DEBUG,core/dblookupext:WARN", "--log-logger-name", "--rest-api-interface=0.0.0.0:8080"]
+ENTRYPOINT ["/node-entrypoint.sh"]
