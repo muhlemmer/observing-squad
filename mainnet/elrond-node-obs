@@ -1,10 +1,9 @@
 FROM golang:1.18 as builder
 
-RUN git clone https://github.com/ElrondNetwork/elrond-config-mainnet && cd elrond-config-mainnet && git checkout --force tags/v1.2.38.1
-RUN git clone https://github.com/ElrondNetwork/elrond-go.git && cd elrond-go && git checkout --force tags/v1.2.38
+RUN git clone https://github.com/ElrondNetwork/elrond-config-mainnet && cd elrond-config-mainnet && git checkout --force tags/v1.3.13.0
+RUN git clone https://github.com/ElrondNetwork/elrond-go.git && cd elrond-go && git checkout --force tags/v1.3.13
 
 WORKDIR /go/elrond-go/
-RUN GO111MODULE=on go mod vendor
 
 #Build node binary
 WORKDIR /go/elrond-go/cmd/node
